@@ -1,58 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Answer Grading System</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.js"></script>
+    <style>
+        /* Custom animation for the form submission */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
-    <header>
-        <h1>Answer Grading System</h1>
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-blue-500 to-teal-500 min-h-screen">
+
+    <header class="text-center py-6 text-white">
+        <h1 class="text-4xl font-bold">Answer Grading System</h1>
     </header>
 
-    <div class="container">
-        <form method="POST">
+    <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg max-w-4xl">
+        <form method="POST" class="space-y-6">
+            <!-- Question Input -->
             <div class="form-group">
-                <label for="question">Question:</label>
-                <input type="text" name="question" required>
+                <label for="question" class="text-lg font-semibold">Question:</label>
+                <input type="text" name="question" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
 
+            <!-- Input Type Selection -->
             <div class="form-group">
-                <label for="input_type">Choose Input Type:</label><br>
-                <input type="radio" name="input_type" value="manual" checked> Manual Model Answer
-                <input type="radio" name="input_type" value="ai"> AI-Generated Model Answer
+                <label for="input_type" class="text-lg font-semibold">Choose Input Type:</label>
+                <div class="flex space-x-4">
+                    <label class="inline-flex items-center text-lg">
+                        <input type="radio" name="input_type" value="manual" checked class="form-radio text-blue-500">
+                        <span class="ml-2">Manual Model Answer</span>
+                    </label>
+                    <label class="inline-flex items-center text-lg">
+                        <input type="radio" name="input_type" value="ai" class="form-radio text-teal-500">
+                        <span class="ml-2">AI-Generated Model Answer</span>
+                    </label>
+                </div>
             </div>
 
+            <!-- Model Answer Input (Manual) -->
             <div class="form-group">
-                <label for="model_answer">Model Answer (Manual):</label>
-                <input type="text" name="model_answer" id="manual_answer" disabled><br><br>
+                <label for="model_answer" class="text-lg font-semibold">Model Answer (Manual):</label>
+                <input type="text" name="model_answer" id="manual_answer" disabled class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
+            <!-- Student Answer Input -->
             <div class="form-group">
-                <label for="student_answer">Student Answer:</label>
-                <input type="text" name="student_answer" required><br><br>
+                <label for="student_answer" class="text-lg font-semibold">Student Answer:</label>
+                <input type="text" name="student_answer" required class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
             </div>
 
-            <input type="submit" value="Submit">
+            <!-- Submit Button -->
+            <div class="text-center">
+                <input type="submit" value="Submit" class="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 transition duration-300 ease-in-out cursor-pointer">
+            </div>
         </form>
 
         <!-- Output Section -->
         {% if score %}
-        <div class="output {{ feedback_class }}">
-            <h3>Predicted Score: {{ score }}</h3>
-            <h3>Feedback: {{ feedback }}</h3>
-            <div class="model-answer">
-                <h3>Model Answer:</h3>
-                <p>{{ model_answer }}</p>
+        <div class="output {{ feedback_class }} mt-8 p-6 bg-gray-100 rounded-lg shadow-md fade-in">
+            <h3 class="text-2xl font-semibold">Predicted Score: {{ score }}</h3>
+            <h3 class="text-lg text-gray-700 mt-2">Feedback: {{ feedback }}</h3>
+            <div class="model-answer mt-4">
+                <h3 class="font-bold">Model Answer:</h3>
+                <p class="text-gray-800">{{ model_answer }}</p>
             </div>
         </div>
         {% endif %}
     </div>
 
-    <footer>
-        <p>Contact Support: <a href="mailto:ITbaigans@gmail.com">ITbaigans@gmail.com</a></p>
+    <footer class="bg-blue-600 text-white py-4 mt-8">
+        <div class="text-center">
+            <p>Contact Support: <a href="mailto:ITbaigans@gmail.com" class="hover:underline">ITbaigans@gmail.com</a></p>
+        </div>
     </footer>
 
     <script>
@@ -69,7 +104,7 @@
         });
 
         // Ensure the model answer field is enabled on page load
-        window.onload = function() {
+        window.onload = function () {
             const manualInput = document.getElementById('manual_answer');
             const aiOption = document.querySelector('input[name="input_type"][value="ai"]');
             if (aiOption.checked) {
@@ -81,4 +116,5 @@
     </script>
 
 </body>
+
 </html>
