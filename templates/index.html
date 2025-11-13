@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answer Grading System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Answer Grading System</h1>
+    </header>
+
+    <div class="container">
+        <form method="POST">
+            <div class="form-group">
+                <label for="question">Question:</label>
+                <input type="text" name="question" required>
+            </div>
+
+            <div class="form-group">
+                <label for="input_type">Choose Input Type:</label><br>
+                <input type="radio" name="input_type" value="manual" checked> Manual Model Answer
+                <input type="radio" name="input_type" value="ai"> AI-Generated Model Answer
+            </div>
+
+            <div class="form-group">
+                <label for="model_answer">Model Answer (Manual):</label>
+                <input type="text" name="model_answer" id="manual_answer" disabled><br><br>
+            </div>
+
+            <div class="form-group">
+                <label for="student_answer">Student Answer:</label>
+                <input type="text" name="student_answer" required><br><br>
+            </div>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <!-- Output Section -->
+        {% if score %}
+        <div class="output {{ feedback_class }}">
+            <h3>Predicted Score: {{ score }}</h3>
+            <h3>Feedback: {{ feedback }}</h3>
+            <div class="model-answer">
+                <h3>Model Answer:</h3>
+                <p>{{ model_answer }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>Contact Support: <a href="mailto:ITbaigans@gmail.com">ITbaigans@gmail.com</a></p>
+    </footer>
+
+    <script>
+        // Enable or disable model_answer field based on the radio button selection
+        document.querySelectorAll('input[name="input_type"]').forEach((radio) => {
+            radio.addEventListener('change', () => {
+                const manualInput = document.getElementById('manual_answer');
+                if (document.querySelector('input[name="input_type"]:checked').value === 'ai') {
+                    manualInput.disabled = true;
+                } else {
+                    manualInput.disabled = false;
+                }
+            });
+        });
+
+        // Ensure the model answer field is enabled on page load
+        window.onload = function() {
+            const manualInput = document.getElementById('manual_answer');
+            const aiOption = document.querySelector('input[name="input_type"][value="ai"]');
+            if (aiOption.checked) {
+                manualInput.disabled = true;
+            } else {
+                manualInput.disabled = false;
+            }
+        };
+    </script>
+
+</body>
+</html>
