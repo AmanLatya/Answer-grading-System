@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Answer Grading System</title>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+
     <style>
         /* Custom animation for the form submission */
         .fade-in {
@@ -35,7 +36,8 @@
             <!-- Question Input -->
             <div class="form-group">
                 <label for="question" class="text-lg font-semibold">Question:</label>
-                <input type="text" name="question" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                <input type="text" name="question"
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
 
             <!-- Input Type Selection -->
@@ -56,18 +58,21 @@
             <!-- Model Answer Input (Manual) -->
             <div class="form-group">
                 <label for="model_answer" class="text-lg font-semibold">Model Answer (Manual):</label>
-                <input type="text" name="model_answer" id="manual_answer" disabled class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" name="model_answer" id="manual_answer" disabled
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
             <!-- Student Answer Input -->
             <div class="form-group">
                 <label for="student_answer" class="text-lg font-semibold">Student Answer:</label>
-                <input type="text" name="student_answer" required class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                <input type="text" name="student_answer" required
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
             </div>
 
             <!-- Submit Button -->
             <div class="text-center">
-                <input type="submit" value="Submit" class="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 transition duration-300 ease-in-out cursor-pointer">
+                <input type="submit" value="Submit"
+                    class="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 transition duration-300 ease-in-out cursor-pointer">
             </div>
         </form>
 
